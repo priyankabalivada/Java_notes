@@ -1,0 +1,21 @@
+HashMap: key-value pair..
+Internally Has BUCKETS. Buckets stores these keyvalue pairs.
+
+How does they know which bucket to store?
+
+They compute hashcode of the key and that On that bucket(Index) value these are stored.What if it computes same hashvslue. Then its is called hashcollision.
+
+Hashcollision can be avoided by Linkdin list ot tree datastructure.
+
+map.put() :
+
+String key1 = "ABC";  // Hash code: 64578
+String key2 = "XYZ";  // Hash code: 64578 (hypothetical collision)
+
+used TREE oe LINKEDLIST for storage
+
+
+map.get()
+
+it again computes hashcode of the key and searches in that bucket.The buciet has 2 keys then used EQUALS() method to compare keys and if false then searches for the another key or else that key is the reqyured one.
+

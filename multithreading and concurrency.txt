@@ -1,0 +1,35 @@
+Thread vs Process
+Process: Instance of program that is getting executed.Process have own heap memory.
+when a program is executes process is created and has own memory.Process takes care of memory,steps.
+Thread:Process has threads.Smallest seq of instructions executed by cpu.heap memory shared by all threads.
+Different process same memory location.
+Each thread has own stack
+new state---->runnable--->running---->blocked----->terminated
+runnable->thread waitinf for cpu timr
+running->got cpu
+run vs yields:
+run() is the method where you define what the thread does.
+yield() provides a way for the current thread to signal that it is willing to step aside to let other threads run.
+sleep()This method is used to pause the execution of the current thread for a specified amount of time.
+notify()Wakes up one thread
+notifyAll()Wakes up all threads
+Voltile keyword:
+
+
+The volatile keyword in Java is used to mark a variable as "stored in main memory." This ensures that the value of the volatile variable is always read directly from and written to the main memory, rather than being cached in the CPU registers or in thread-local memory
+public class SharedObject {
+    private volatile boolean flag = false;
+
+    public void setFlag() {
+        flag = true;  // This write will be visible to other threads
+    }
+
+    public void checkFlag() {
+        while (!flag) {
+            // Loop will exit when flag is set to true by another thread
+        }
+        System.out.println("Flag is true!");
+    }
+}
+
+

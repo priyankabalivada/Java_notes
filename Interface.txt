@@ -1,0 +1,67 @@
+Interface: There are 2 system, one system interacts with other without showing details .
+
+Its an abstraction. We can define WHAT CLASS MUST DO , BUT NOT HOW CLASS WILL DO.
+
+**Only public and default
+Private methods are meant for internal use only, which contradicts the purpose of an interface
+
+-->We cannot create obj of interface,but holds reference of all classes.
+
+Multiple inheritance:
+
+Dimond problem.
+
+
+Class A
+
+public Boolean caBreath(){
+}}
+
+Class B
+{
+public Boolean caBreath(){
+}
+}
+
+IF class C extends classA,B there is a ambiguity which caBreath to called.
+
+
+
+but if we have interface which has only method signature not impl
+
+
+Interface A{ 
+public Boolean caBreath();{
+                        Interface B{
+                           public Boolean caBreath();
+                           
+
+
+}                                     }
+If class C implemets A,B the implementation of caBreath will be there in Class C so there is no ambiguity
+
+
+
+
+
+Methods in Interface: All methods in interface are public or default.Methods can't be final final means we can't change it or override it, but in interface when implemented, it needs to be overridden.
+Fields in Interface: Fields should be constants(public static).They should not private or protected.
+In concrete class all methods impl should be there.
+
+
+
+
+Nested Interface:Interfaces inside interface to group logically reated interfaces. Access inner one parent.inner.
+
+
+
+
+
+Abstract class             vs                    Interface
+
+-->both abs and non abs methods           -->only abs methods.    
+--->extend from anotter class and         -->ectend from interface
+interfaces  .
+--->static,non static,final               -->constants    
+--->not supports multiple inheritance     -->supports multiple inheritance   
+-->can have constructor                  --- can not have constructor

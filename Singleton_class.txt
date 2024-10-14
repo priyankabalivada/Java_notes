@@ -1,0 +1,38 @@
+singleton class objective to create one and only one obj.
+eg:db connection . One time connection to setup and do as many as queries . No matter how many times its called one setup obj is required.
+
+Different ways:
+
+Eagar initialization: Something in advance.when an app starts all static fields preloaded
+
+---> Create private static object
+---> create private constructor of that class 
+---> create public static method to return that obj that ensures only one obj is called.
+
+Lazy Initialization: There is a problem that even though there is public method if we cant use it it is waste of memeory.To overcome that we have lazy init.
+
+---> Create private static object but not initialize it to null.
+---> create private constructor of that class 
+---> create public static method to return that obj if its null.
+
+---// Disadv is that what is 2 threads comes and 2 obs created.
+
+
+Sync method:To overcome dis of lazy init,keep methodas sync.
+Only one thread is allowed to go inside.
+Dis:very slow.
+
+
+We got double checking locking system to overcome abov prblm
+In step3, check obj is null.Now locks and checks if obj is again lock.Only on ethread aquires lock and create obj and release lock and thread2 checks.Obj is already created .
+memory issue is the disadv.memory updated in cache not in the memory.
+
+
+In order to resolve this 
+
+bill pugh sol: private static nested class so this is not loaded when app starts. only if they are referenced they are .
+
+
+Enum:by default all constructors are Enum.Only instance per jvm.
+
+

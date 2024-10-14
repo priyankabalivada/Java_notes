@@ -1,0 +1,37 @@
+Immutable classes: We cant change state .
+eg:string,wrapper class.
+This concept is important in multi-threaded programming, as it helps ensure that objects remain consistent even when accessed by multiple threads concurrently.
+
+-->create final class
+-->create private final class so cant be extended. 
+--->All class members should be private
+-->no setters only getters
+
+public final class ImmutableClass {
+    private final String name;
+    private final int age;
+    private final List<String> hobbies;
+
+    // Constructor to initialize the fields
+    public ImmutableClass(String name, int age, List<String> hobbies) {
+        this.name = name;
+        this.age = age;
+        // Return a new copy of the list to prevent external modification
+        this.hobbies = new ArrayList<>(hobbies);
+    }
+
+    // Getter for name
+    public String getName() {
+        return name;
+    }
+
+    // Getter for age
+    public int getAge() {
+        return age;
+    }
+
+    // Getter for hobbies (returning a new copy to maintain immutability)
+    public List<String> getHobbies() {
+        return new ArrayList<>(hobbies);
+    }
+}

@@ -1,0 +1,21 @@
+Memory management done by jvm
+Stack:
+temporary variables are stored.
+For each method there is memory frame.
+Stores reference of heap obj.
+variables within the scope .
+Strong reference:
+weak reference:
+
+
+heap:String pool
+objects are stored.
+
+
+GC: It checks if any references are there particular obj by scnning heap.No reference delete. JVM takes care.
+
+Reference Datatype: class,string,interface,array
+
+new object
+
+Heap memory: when we create object using new, we are allocating space created in memory.

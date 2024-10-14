@@ -1,0 +1,13 @@
+Float:32bit
+
+---1bit----8bit----23bit---
+sign      exponent  mantissa  
+
+eg: 4.125 howits stored in memory
+
+step1: convert to binary 4--100,.125-- .001
+step2: Make it in the  exponent form like 100.001=> 1.00001*2^2
+stepp3:add bias
+
+
+

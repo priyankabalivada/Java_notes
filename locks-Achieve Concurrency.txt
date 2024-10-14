@@ -1,0 +1,190 @@
+Sychronize
+{
+//Monitor lock
+//critical section
+}
+
+Synchronize block also called moniton lock.
+
+
+When multiple threads are coming only one thread be able to access critical section.
+
+class Counter {
+    private int count = 0;
+
+    // Synchronized method to ensure only one thread can access at a time
+    public synchronized void increment() {
+        count++;
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+public class SyncDemo {
+    public static void main(String[] args) throws InterruptedException {
+        Counter counter = new Counter();
+
+        // Creating two threads
+        Thread t1 = new Thread(new Runnable() {
+            public void run() {
+                for (int i = 0; i < 1000; i++) {
+                    counter.increment();
+                }
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            public void run() {
+                for (int i = 0; i < 1000; i++) {
+                    counter.increment();
+                }
+            }
+        });
+
+        // Starting both threads
+        t1.start();
+        t2.start();
+
+        // Wait for both threads to finish
+        t1.join();
+        t2.join();
+
+        // Printing the final value of count
+        System.out.println("Final count: " + counter.getCount());
+    }
+}
+Output:
+yaml
+Copy code
+Final count: 2000
+Explanation:
+The Counter class has a method increment() which is synchronized, meaning only one thread can execute it at a time.
+Two threads (t1 and t2) are created, both incrementing the counter 1000 times each.
+By using the synchronized keyword, we prevent race conditions, ensuring the final value of count is the expected 2000 (1000 increments per thread).
+Without synchronization, the final value could be inconsistent due to simultaneous access to the increment method.
+
+
+
+
+
+
+A race condition occurs in a multithreaded or parallel execution environment when two or more threads or processes try to change shared data at the same time, leading to unpredictable results.
+
+You said:
+what if we do not use synchronize keyword in above example
+
+If you do not use the synchronized keyword in the above example, the increment() method will no longer be thread-safe. This can lead to a race condition, where multiple threads are trying to access and modify the count variable simultaneously, causing inconsistent results.
+
+Here’s what can happen if synchronized is removed:
+
+Updated Code without synchronized
+java
+Copy code
+class Counter {
+    private int count = 0;
+
+    // Increment method without synchronization
+    public void increment() {
+        count++;
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+public class SyncDemo {
+    public static void main(String[] args) throws InterruptedException {
+        Counter counter = new Counter();
+
+        // Creating two threads
+        Thread t1 = new Thread(new Runnable() {
+            public void run() {
+                for (int i = 0; i < 1000; i++) {
+                    counter.increment();
+                }
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            public void run() {
+                for (int i = 0; i < 1000; i++) {
+                    counter.increment();
+                }
+            }
+        });
+
+        // Starting both threads
+        t1.start();
+        t2.start();
+
+        // Wait for both threads to finish
+        t1.join();
+        t2.join();
+
+        // Printing the final value of count
+        System.out.println("Final count: " + counter.getCount());
+    }
+}
+Possible Output:
+yaml
+Copy code
+Final count: 1783
+Explanation of the Issue:
+Race Condition: Without synchronization, multiple threads can access the increment() method simultaneously. This leads to a race condition, where both threads read the same value of count, increment it, and write the result back. However, since both threads may be working on the same initial value, some increments are lost.
+
+
+ReentrantLock:
+A ReentrantLock is a lock that allows a thread to acquire the lock multiple times (reentrant), provided that the same thread has already acquired it. It also allows for more control over the lock mechanism compared to the implicit locking provided by synchronized.
+
+Ithas 2 methods tryLock(),Uninterrupted().
+
+
+******Key Differences between sync and retrant lock
+1. Retrant lock needs explicit lock() and unlock() failed to do so may lead to deadlock
+2. If lock is not obtained in retrant lock it is allowed ti do something else because it has trylock() method.
+3.We can specify timeouts as well
+4.If we have different objects and if we wanna allow only one to go inside critical section , instead of sync use retrant.
+
+
+READ-WRITE LOCK:
+We use it when reads are very high
+
+SHARED LOCK:
+If any thread put shared lock then no other thread can acquire exclusive lock of that resource. Shared lock could only read.
+EXCLUSIVE LOCK:
+No other thread can acquire shread lock. It can modify . 
+
+
+If there are 2 shared locks on a critical section(Shared resource) , once theyare released then only it can acquire X lock
+
+
+
+
+
+STAMPED LOCK:Read write lock + optimistic lock
+
+
+LOCKS----optimistics, pesimitic
+
+Optimistic:No lock acquired.
+
+There is stamp number given when every read operation/wrire op  hapends. The stamp is a unique identifier for the acquired lock. When you release the lock, the same stamp is passed to ensure the correct lock is released.
+In optimistic reading, the lock doesn’t prevent writes from happening. Instead, the thread gets a stamp that represents the version of the state when it started reading. Later, the thread must check if this stamp is still valid (i.e., no writing occurred while reading)By calling validate(stamp), the thread checks if the stamp it received is still valid, meaning no other thread has acquired a write lock and modified the data in the meantime.
+
+
+
+
+SEMPHORE: Provide count. The count number of threads acquire lock at same time.
+
+
+
+
+INTERTHREAD COMMUNICATION:
+
+
+
+
+
