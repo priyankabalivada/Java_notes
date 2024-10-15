@@ -1,0 +1,11 @@
+----->Build automation tool
+------>project management
+------>automate the process of building, testing, and managing dependencies for Java projects
+
+
+_----mvn clean---Clean the proj by deleting TARGET dir
+-----mvn compile--compile project source code
+-----mvn test-run unit tests
+-----mvn package-War or Jar the project
+-----mvn install--installs the packages into LOCAL MAVEN REPO
+-----mvn deploy---deploys yo remote repo

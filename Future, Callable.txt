@@ -1,0 +1,23 @@
+Future: we create threadpool executor with some thrads and submit task but to know status of thraead in async mode, we use future
+
+Future is an interface ,
+it allows us to check status of computation ,
+get the result, 
+take care of excetion
+
+
+---->5 methods
+cancel()--if main wanna cancel execution of async task,Hey cancel it!>
+isCancelled()-- status check
+isDone()--task is done
+get()--The caller wait for completion of async task, After task competed retrive result if completed
+
+Submit(runnable), submit(runnable,t), submit(callable)
+Callable(): Returns certain value
+
+Runnable,Callable both are same , Has task that is required to be executed.
+
+Callable has return type nd runnable has nothing as such
+Completable futre:
+
+
